@@ -28,29 +28,16 @@ app.get('/', routes.index);
 
 // Chat Rooms
 
-//
-// {
-// 	name: {
-// 		partner:
-// 		socket:
-// 	}
-// 	name: {
-// 		partner:
-// 		socket:
-// 	}
-// }
 
-var nameToSocket = {};
 var waiter;
-//  = {
-// 	// name:
-// 	// socket:
-// };
+// {
+// 	name:
+// 	socket:
+// }
 
 io.sockets.on('connection', function(socket) {
 	// Adds a new user to the system
 	socket.on('addUser', function(username) {
-		// nameToSocket[username] = socket; // add name and socket to map
 
 		if (!waiter) {
 			waiter = {
@@ -72,7 +59,7 @@ io.sockets.on('connection', function(socket) {
 		socket.partner.emit('newMessage', message);
 	});
 
-//	socket.on('disconnect', function(username) {
-//
-//	});
+	// socket.on('disconnect', function() {
+
+	// });
 });
