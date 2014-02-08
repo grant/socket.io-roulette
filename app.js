@@ -56,7 +56,11 @@ io.sockets.on('connection', function(socket) {
 	});
 
 	socket.on('sendMessage', function(message) {
-		socket.partner.emit('newMessage', message);
+		if (socket.partner) {
+			socket.partner.emit('newMessage', message);
+		} else {
+			console.error('Error: Trying to send a message without a partner');
+		}
 	});
 
 	// socket.on('disconnect', function() {
