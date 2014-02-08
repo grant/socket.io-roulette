@@ -61,7 +61,7 @@ li {
 /* Message Area */
 .username, .messageArea {
 	float: left;
-	padding: 10px;
+	padding: 2px 3px;
 }
 .username {
 	text-align: right;
