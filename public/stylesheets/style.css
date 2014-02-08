@@ -7,7 +7,7 @@ html, body {
 	height: 100%;
 
 	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-	color: rgb(215, 215, 215);
+	color: rgb(225, 225, 225);
 
 	background-color: rgb(32, 32, 32);
 }
@@ -66,7 +66,14 @@ li {
 .username {
 	text-align: right;
 	width: 20%;
+	color: rgb(196, 175, 117);
 }
 .messageArea {
 	width: 80%;
+}
+.log .messageArea {
+	color: #666;
+}
+.log .username {
+	color: rgb(126, 105, 67);
 }

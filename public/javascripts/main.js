@@ -13,7 +13,7 @@ $(function () {
 
 	socket.on('connect', function(){
 		connected = true;
-		postMessage('socket.io', 'Socket Power! (Connected to server)');
+		postMessage('socket.io', 'Socket Power! (Connected to server)', true);
 		socket.emit('addUser', username);
 	});
 
@@ -40,10 +40,13 @@ $(function () {
 	}
 
 	// Posts the message in the message area
-	function postMessage (username, message) {
+	function postMessage (username, message, isLog) {
 		var $usernameArea = $('<div/>').addClass('username').html(username);
 		var $messageArea = $('<div/>').addClass('messageArea').html(message);
 		var $message = $('<li/>').append([$usernameArea, $messageArea]);
+		if (isLog) {
+			$message.addClass('log');
+		}
 		$chatArea.find('.messages').append($message);
 
 		// Scroll to bot
