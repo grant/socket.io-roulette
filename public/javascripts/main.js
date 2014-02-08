@@ -1,5 +1,5 @@
 $(function () {
-	var username = prompt('Type a username');
+	var username = 'test';//prompt('Type a username');
 	var $chatInput = $('.chatInput');
 	var $chatArea = $('.chatArea');
 
@@ -7,13 +7,11 @@ $(function () {
 
 	// Init
 	$chatInput.focus();
-	var socket = io.connect('https://localhost');
+	var socket = io.connect();
 
 	socket.on('connect', function(){
-		console.log('hi');
 		sendMessage('socket.io', 'Socket Power!');
 		socket.emit('addUser', username);
-		});
 	});
 
 	// Events
@@ -58,4 +56,5 @@ $(function () {
 		otherUser = name;
 		var matchedMessage = "You have been matched with " + otherUser + "!!!";
 	});
+
 });

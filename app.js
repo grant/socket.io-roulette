@@ -1,8 +1,3 @@
-
-/**
- * Module dependencies.
- */
-
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
@@ -30,13 +25,14 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/users', user.list);
 
 // Chat Rooms
 var nameToSocket = {};
 var waiter = "";
 
 io.sockets.on('connection', function(socket) {
+	console.log('hi');
+	/*
 	socket.on('addUser', function(username) {
 		nameToSocket.username = socket; // add name and socket to map
 		if (waiter === "") {
@@ -63,4 +59,5 @@ io.sockets.on('connection', function(socket) {
 //	socket.on('disconnect', function(username) {
 //
 //	});
+*/
 });
