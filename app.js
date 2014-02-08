@@ -27,32 +27,50 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 
 // Chat Rooms
+
+//
+// {
+// 	name: {
+// 		partner:
+// 		socket:
+// 	}
+// 	name: {
+// 		partner:
+// 		socket:
+// 	}
+// }
+
 var nameToSocket = {};
-var waiter = "";
+var waiter;
+//  = {
+// 	// name:
+// 	// socket:
+// };
 
 io.sockets.on('connection', function(socket) {
+	// Adds a new user to the system
 	socket.on('addUser', function(username) {
-		nameToSocket.username = socket; // add name and socket to map
-		if (waiter === "") {
-			waiter = username;
+		// nameToSocket[username] = socket; // add name and socket to map
+
+		if (!waiter) {
+			waiter = {
+				name: username,
+				socket: socket
+			};
 		} else {
-			var person1 = waiter;
-			var person2 = username;
-			waiter = "";
+			// connect user1 to waiter
+			socket.partner = waiter.socket;
+			// Waiter to user1
+			waiter.socket.partner = socket;
 
-			var socket1 = nameToSocket.person1;
-			var socket2 = nameToSocket.person2;
-
-			socket1.emit('matched', person2);
-			socket2.emit('matched', person1);
+			socket.emit('matched', waiter.name);
+			waiter.socket.emit('matched', username);
 		}
 	});
 
-	// socket.on('sendMessage', function(user, data) {
-	// 	var userSocket = nameToSocket.user;
-
-	// 	userSocket.emit('newMessage', data);
-	// });
+	socket.on('sendMessage', function(message) {
+		socket.partner.emit('newMessage', message);
+	});
 
 //	socket.on('disconnect', function(username) {
 //

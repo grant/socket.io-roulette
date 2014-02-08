@@ -1,5 +1,6 @@
 $(function () {
-	var username = 'test';//prompt('Type a username');
+	var connected = false;
+	var username = prompt('Type a username');
 	var $chatInput = $('.chatInput');
 	var $chatArea = $('.chatArea');
 
@@ -10,7 +11,8 @@ $(function () {
 	var socket = io.connect();
 
 	socket.on('connect', function(){
-		sendMessage('socket.io', 'Socket Power! (Connected to server)');
+		connected = true;
+		postMessage('socket.io', 'Socket Power! (Connected to server)');
 		socket.emit('addUser', username);
 	});
 
@@ -30,12 +32,15 @@ $(function () {
 
 
 	// Sends message to other user
-	function sendMessage (username, message) {
-		// Socketio stuff
-		postMessage(username, message);
-		// socket.emit('sendMessage', username, message);
+	function sendMessage (message) {
+		if (connected) {
+			// Socketio stuff
+			postMessage(username, message);
+			socket.emit('sendMessage', message);
+		}
 	}
 
+	// Posts the message in the message area
 	function postMessage (username, message) {
 		var $usernameArea = $('<div/>').addClass('username').html(username);
 		var $messageArea = $('<div/>').addClass('messageArea').html(message);
@@ -55,6 +60,7 @@ $(function () {
 	socket.on('matched', function(name) {
 		otherUser = name;
 		var matchedMessage = "You have been matched with " + otherUser + "!!!";
+		postMessage(name, matchedMessage);
 	});
 
 });
