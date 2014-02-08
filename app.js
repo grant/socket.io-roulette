@@ -31,8 +31,6 @@ var nameToSocket = {};
 var waiter = "";
 
 io.sockets.on('connection', function(socket) {
-	console.log('hi');
-	/*
 	socket.on('addUser', function(username) {
 		nameToSocket.username = socket; // add name and socket to map
 		if (waiter === "") {
@@ -50,14 +48,13 @@ io.sockets.on('connection', function(socket) {
 		}
 	});
 
-	socket.on('sendMessage', function(user, data) {
-		var userSocket = nameToSocket.user;
+	// socket.on('sendMessage', function(user, data) {
+	// 	var userSocket = nameToSocket.user;
 
-		userSocket.emit('newMessage', data);
-	});
+	// 	userSocket.emit('newMessage', data);
+	// });
 
 //	socket.on('disconnect', function(username) {
 //
 //	});
-*/
 });

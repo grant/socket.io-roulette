@@ -10,7 +10,7 @@ $(function () {
 	var socket = io.connect();
 
 	socket.on('connect', function(){
-		sendMessage('socket.io', 'Socket Power!');
+		sendMessage('socket.io', 'Socket Power! (Connected to server)');
 		socket.emit('addUser', username);
 	});
 
@@ -30,10 +30,10 @@ $(function () {
 
 
 	// Sends message to other user
-	function sendMessage (message) {
+	function sendMessage (username, message) {
 		// Socketio stuff
 		postMessage(username, message);
-		socket.emit('sendMessage', username, message);
+		// socket.emit('sendMessage', username, message);
 	}
 
 	function postMessage (username, message) {
