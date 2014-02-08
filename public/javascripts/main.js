@@ -8,6 +8,7 @@ $(function () {
 
 	// Init
 	$chatInput.focus();
+
 	var socket = io.connect();
 
 	socket.on('connect', function(){
@@ -30,11 +31,9 @@ $(function () {
 		$chatInput.focus();
 	});
 
-
 	// Sends message to other user
 	function sendMessage (message) {
 		if (connected) {
-			// Socketio stuff
 			postMessage(username, message);
 			socket.emit('sendMessage', message);
 		}
@@ -62,5 +61,4 @@ $(function () {
 		var matchedMessage = "You have been matched with " + otherUser + "!!!";
 		postMessage(name, matchedMessage);
 	});
-
 });
