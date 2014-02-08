@@ -7,6 +7,7 @@ $(function () {
 	$chatInput.focus();
 	var socket = io.connect('//0.0.0.0:3000');
 	socket.on('connect', function(){
+		console.log('hi');
 		sendMessage('socket.io', 'Socket Power!');
 		socket.emit('addUser', username);
 	});
