@@ -3,13 +3,17 @@ $(function () {
 	var $chatInput = $('.chatInput');
 	var $chatArea = $('.chatArea');
 
+	var otherUser;
+
 	// Init
 	$chatInput.focus();
-	var socket = io.connect('//0.0.0.0:3000');
+	var socket = io.connect('https://localhost');
+
 	socket.on('connect', function(){
 		console.log('hi');
 		sendMessage('socket.io', 'Socket Power!');
 		socket.emit('addUser', username);
+		});
 	});
 
 	// Events
@@ -31,7 +35,7 @@ $(function () {
 	function sendMessage (message) {
 		// Socketio stuff
 		postMessage(username, message);
-
+		socket.emit('sendMessage', username, message);
 	}
 
 	function postMessage (username, message) {
@@ -43,4 +47,15 @@ $(function () {
 		// Scroll to bot
 		$chatArea[0].scrollTop = $chatArea[0].scrollHeight;
 	}
+
+	// post messages sent by otherUser
+	socket.on('newMessage', function(data) {
+		postMessage(otherUser, data);
+	});
+
+	// let user know who he just connected with
+	socket.on('matched', function(name) {
+		otherUser = name;
+		var matchedMessage = "You have been matched with " + otherUser + "!!!";
+	});
 });
