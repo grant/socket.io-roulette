@@ -4,7 +4,7 @@ function addOwnSrc(video){
 	if (!userStream) {
 		getUserStream(function () {
             // Retry
-            addVideoSrc(video);
+            addOwnSrc(video);
         });
 	} else {
 		addVideoSrc(video, userStream);
