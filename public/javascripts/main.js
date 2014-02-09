@@ -9,6 +9,7 @@ $(function () {
 		// socket.emit('addUser', username);
 	});
 
+	addVideo();
 	$(window).click(function () {
 		addVideo();
 	});
@@ -27,6 +28,10 @@ $(function () {
 		addVideoSrc($video[0]);
 		videos.push($video);
 
+		createVidTable();
+	}
+
+	function createVidTable () {
 		// Reconstruct table
 		$videos.find('tbody').empty();
 		var videoRatioData = getVideoRatioData(videos.length);
@@ -51,10 +56,11 @@ $(function () {
 	}
 
 	function removeVideo () {
-
+		videos.pop();
+		$videos.find('video').last().remove();
+		createVidTable();
 	}
 
-	var addRowVidNumbers = [3, 7, 10, 17, 25, 33, 45]; // The number of videos needed before adding a row
 	function getVideoRatioData (numVideos) {
 		var numRows = getNumRows(numVideos);
 		var numCols = getNumCols(numRows, numVideos);
@@ -62,6 +68,7 @@ $(function () {
 	}
 
 	function getNumRows (numVideos) {
+		var addRowVidNumbers = [3, 7, 13, 25, 36, 49, 57, 89]; // The number of videos needed before adding a row
 		var numRows = 1;
 		var i = 0;
 		while (i < addRowVidNumbers.length && addRowVidNumbers[i] <= numVideos) {
