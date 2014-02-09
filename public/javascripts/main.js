@@ -25,7 +25,7 @@ $(function () {
 	function addVideo () {
 		// Create video element
 		var $video = $('<video/>').addClass('videoFrame');
-		addVideoSrc($video[0]);
+		addOwnSrc($video[0]);
 		videos.push($video);
 
 		createVidTable();

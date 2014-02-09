@@ -1,23 +1,25 @@
 var userStream;
 
-// video is a video element
-function addVideoSrc (video) {
-    if (!userStream) {
-        getUserStream(function () {
+function addOwnSrc(video){
+	if (!userStream) {
+		getUserStream(function () {
             // Retry
             addVideoSrc(video);
         });
+	} else {
+		addVideoSrc(video, userStream);
+	}
+}
+
+// video is a video element
+function addVideoSrc (video, stream) {
+    if (video.mozSrcObject !== undefined) {
+        video.mozSrcObject = stream;
     } else {
-        // Set video stream
-        var stream = userStream;
-        if (video.mozSrcObject !== undefined) {
-            video.mozSrcObject = stream;
-        } else {
-            // video.src = (window.URL && window.URL.createObjectURL(stream)) || stream;
-            video.src = (window.URL && window.URL.createObjectURL(stream)) || stream;
-        }
-        video.play();
+        // video.src = (window.URL && window.URL.createObjectURL(stream)) || stream;
+        video.src = (window.URL && window.URL.createObjectURL(stream)) || stream;
     }
+    video.play();
 }
 
 function getUserStream (callback) {
