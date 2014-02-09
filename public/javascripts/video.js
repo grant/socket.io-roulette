@@ -1,5 +1,5 @@
 window.addEventListener('DOMContentLoaded', function() {
-    'use strict';
+    
     var video = document.querySelector('video');
  
     function successCallback(stream) {
