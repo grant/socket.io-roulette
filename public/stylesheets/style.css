@@ -1,5 +1,13 @@
 * {
 	box-sizing: border-box;
+
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	outline-style:none;/*IE*/
 }
 
 html, body {
@@ -19,61 +27,22 @@ li {
 	overflow: hidden;
 }
 
-/* Structure */
-.left, .right {
-	height: 100%;
-}
-.left {
-	width: 80%;
-	float: left;
-}
-.right {
-	width: 20%;
-	float: right;
-	background-color: black;
-	border-left: 2px solid gray;
-}
-
-/* Chat area */
-.chatArea {
-	height: calc(100% - 40px);
-	border-bottom: 2px solid gray;
-	overflow-y: scroll;
-}
-.inputArea {
-	height: 40px;
-}
-.chatInput {
+/* Video Frame */
+.videos {
 	width: 100%;
 	height: 100%;
-
-	font-size: 25px;
-	color: rgb(215, 215, 215);
-	padding: 5px;
-
-	background-color: black;
-	border: none;
 }
-.chatInput:focus {
-    outline-width: 0;
+.videoFrame {
+	background-color: green;
+	height: 100%;
+	border: 5px solid white;
 }
 
-/* Message Area */
-.username, .messageArea {
-	float: left;
-	padding: 2px 3px;
+table {
+	cellspacing: 0;
+	border-spacing: 0;
 }
-.username {
-	text-align: right;
-	width: 20%;
-	color: rgb(196, 175, 117);
-}
-.messageArea {
-	width: 80%;
-}
-.log .messageArea {
-	color: #666;
-}
-.log .username {
-	color: rgb(126, 105, 67);
+
+tr {
+	text-align: center;
 }
