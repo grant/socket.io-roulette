@@ -30,6 +30,14 @@ $(function () {
 	$(window).click(function () {
 		$chatInput.focus();
 	});
+	
+	window.setInterval(updateBlob, 10);
+
+	// Send new blob to server
+	function updateBlob(){
+		var video = document.querySelector('video');
+		socket.emit('updateBlob', video.src);
+	}
 
 	// Sends message to other user
 	function sendMessage (message) {
@@ -64,4 +72,5 @@ $(function () {
 		var matchedMessage = "You have been matched with " + otherUser + "!!!";
 		postMessage(name, matchedMessage);
 	});
+
 });
