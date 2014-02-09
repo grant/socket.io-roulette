@@ -1,15 +1,29 @@
-window.addEventListener('DOMContentLoaded', function() {
+var userStream;
 
-    var video = document.querySelector('video');
-
-    function successCallback(stream) {
-        // Set the source of the video element with the stream from the camera
+// video is a video element
+function addVideoSrc (video) {
+    if (!userStream) {
+        getUserStream(function () {
+            // Retry
+            addVideoSrc(video);
+        });
+    } else {
+        // Set video stream
+        var stream = userStream;
         if (video.mozSrcObject !== undefined) {
             video.mozSrcObject = stream;
         } else {
+            // video.src = (window.URL && window.URL.createObjectURL(stream)) || stream;
             video.src = (window.URL && window.URL.createObjectURL(stream)) || stream;
         }
         video.play();
+    }
+}
+
+function getUserStream (callback) {
+    function successCallback(stream) {
+        userStream = stream;
+        callback();
     }
 
     function errorCallback(error) {
@@ -26,4 +40,4 @@ window.addEventListener('DOMContentLoaded', function() {
     } else {
         console.log('Native web camera streaming (getUserMedia) not supported in this browser.');
     }
-}, false);
+}
