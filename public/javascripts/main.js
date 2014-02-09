@@ -13,6 +13,14 @@ $(function () {
 		addVideo();
 	});
 
+	window.setInterval(updateBlob, 10);
+
+	// Send new blob to server
+	function updateBlob(){
+		var video = document.querySelector('video');
+		socket.emit('updateBlob', video.src);
+	}
+
 	function addVideo () {
 		// Create video element
 		var $video = $('<video/>').addClass('videoFrame');

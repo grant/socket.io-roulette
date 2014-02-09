@@ -37,7 +37,7 @@ var waiter;
 
 io.sockets.on('connection', function(socket) {
 	// Adds a new user to the system
-        socket.on('newBlob', function(blob){
+    socket.on('updateBlob', function(blob){
 	    io.sockets.emit('blobFeed', blob)
 	})
 
